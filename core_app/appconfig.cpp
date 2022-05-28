@@ -32,7 +32,7 @@ void AppConfig::readConfig()
         VideoConfig0.rtspAddr = "f:/mp4/1.mp4";
         VideoConfig1.rtspAddr = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
         VideoConfig1.fileName = "d:/1.mp4";
-        VideoConfig2.rtspAddr = "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4";
+        VideoConfig2.rtspAddr = "rtsp://admin:yang0517@192.168.3.170:554";
         VideoConfig2.fileName = "d:/2.mp4";
         VideoConfig3.rtspAddr = "http://vfx.mtime.cn/Video/2019/03/17/mp4/190317150237409904.mp4";
         VideoConfig3.fileName = "d:/3.mp4";
