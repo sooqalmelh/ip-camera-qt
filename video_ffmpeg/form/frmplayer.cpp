@@ -116,7 +116,7 @@ void frmPlayer::initForm()
 
     //安卓屏幕比较小尽量空出位置
 #ifdef Q_OS_ANDROID
-    AppConfig::Callback5 = true;
+    AppConfig::VideoConfig2.callback = true;
     ui->btnVersion->setVisible(false);
     ui->btnAbout->setVisible(false);
     ui->verticalSpacer->changeSize(0, 0, QSizePolicy::Ignored, QSizePolicy::Ignored);

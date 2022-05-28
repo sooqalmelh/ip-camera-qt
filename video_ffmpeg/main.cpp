@@ -5,16 +5,16 @@
 bool checkPermission(const QString &permission)
 {
 #ifdef Q_OS_ANDROID
-#if (QT_VERSION >= QT_VERSION_CHECK(5,10,0))
-    QtAndroid::PermissionResult result = QtAndroid::checkPermission(permission);
-    if (result == QtAndroid::PermissionResult::Denied) {
-        QtAndroid::requestPermissionsSync(QStringList() << permission);
-        result = QtAndroid::checkPermission(permission);
-        if (result == QtAndroid::PermissionResult::Denied) {
-            return false;
-        }
-    }
-#endif
+// #if (QT_VERSION >= QT_VERSION_CHECK(5,10,0))
+//     QtAndroid::PermissionResult result = QtAndroid::checkPermission(permission);
+//     if (result == QtAndroid::PermissionResult::Denied) {
+//         QtAndroid::requestPermissionsSync(QStringList() << permission);
+//         result = QtAndroid::checkPermission(permission);
+//         if (result == QtAndroid::PermissionResult::Denied) {
+//             return false;
+//         }
+//     }
+// #endif
 #endif
     return true;
 }
