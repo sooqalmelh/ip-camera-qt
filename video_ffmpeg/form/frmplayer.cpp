@@ -1,4 +1,24 @@
-﻿#include "frmplayer.h"
+﻿/**
+ * @file frmplayer.cpp
+ * @author creekwater
+ * @brief 
+ * 
+ * 第三个视频播放器界面
+ * 
+ * 使用FFmpegWidget控件
+ * 
+ * 1、在视频地址中输入RTSP地址，可以实时播放视频
+ * 2、输入文件地址，可以播放视频文件，可以拉进度条
+ * 3、倍速测试，暂时有问题
+ * 
+ * @version 0.1
+ * @date 2022-05-29
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
+#include "frmplayer.h"
 #include "ui_frmplayer.h"
 #include "head.h"
 #include "ffmpeghelper.h"

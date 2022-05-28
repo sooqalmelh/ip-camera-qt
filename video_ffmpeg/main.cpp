@@ -128,7 +128,7 @@ int main(int argc, char *argv[])
     w.showMaximized();
 #else
     w.resize(AppData::FormWidth, AppData::FormHeight);
-    w.setWindowTitle(QString("qt+ffmpeg 示例 %1 %2").arg(AppData::Version).arg(AppData::TitleFlag));
+    w.setWindowTitle(QString("wifi-camera (version:%1)          %2").arg(AppData::Version).arg(AppData::TitleFlag));
     QUIHelper::showForm(&w);
 #endif
 

@@ -1,12 +1,19 @@
 ﻿#include "quihelper.h"
 
 #define TIMEMS qPrintable(QTime::currentTime().toString("HH:mm:ss zzz"))
+
+
+/**
+ * @brief 获取当前鼠标所在屏幕索引+尺寸
+ * 
+ * @return int 
+ */
 int QUIHelper::getScreenIndex()
 {
     //需要对多个屏幕进行处理
     int screenIndex = 0;
 #if (QT_VERSION >= QT_VERSION_CHECK(5,0,0))
-    int screenCount = qApp->screens().count();
+    int screenCount = qApp->screens().count();          // 获取屏幕的个数
 #else
     int screenCount = qApp->desktop()->screenCount();
 #endif

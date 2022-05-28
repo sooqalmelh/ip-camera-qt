@@ -1,4 +1,19 @@
-﻿#include "frmtab.h"
+﻿/**
+ * @file frmtab.cpp
+ * @author creekwater
+ * @brief 
+ * 
+ * TAB控件，用来切换不同的视频流测试窗体
+ * 
+ * @version 0.1
+ * @date 2022-05-29
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
+
+#include "frmtab.h"
 #include "ui_frmtab.h"
 #include "head.h"
 #include "frmmain.h"

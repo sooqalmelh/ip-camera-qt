@@ -170,6 +170,10 @@ bool FFmpegThread::init()
     return true;
 }
 
+/**
+ * @brief 初始化摄像头参数（USB摄像头、IP摄像头）
+ * 
+ */
 void FFmpegThread::initOption()
 {
     //在打开码流前指定各种参数比如:探测时间/超时时间/最大延时等
@@ -232,6 +236,12 @@ void FFmpegThread::initOption()
     }
 }
 
+/**
+ * @brief 初始化输入
+ * 
+ * @return true 
+ * @return false 
+ */
 bool FFmpegThread::initInput()
 {
     //实例化格式处理上下文
@@ -1706,6 +1716,7 @@ void FFmpegThread::setSaveTime(const QDateTime &saveTime)
     this->saveTime = saveTime;
 }
 
+// 开始播放
 void FFmpegThread::play()
 {
     //通过标志位让线程执行初始化
@@ -1713,6 +1724,7 @@ void FFmpegThread::play()
     isPause = false;
 }
 
+// 暂停播放
 void FFmpegThread::pause()
 {
     //只对本地文件起作用

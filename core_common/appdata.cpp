@@ -1,13 +1,13 @@
 ﻿#include "appdata.h"
 #include "quihelper.h"
 
-QString AppData::Version = "V20220118";
-QString AppData::TitleFlag = "(QQ: 517216493 WX: feiyangqingyun)";
+QString AppData::Version = "2022-06-01";
+QString AppData::TitleFlag = "powered by creekwater<灵溪驿站>";
 
-int AppData::RowHeight = 25;
-int AppData::RightWidth = 180;
-int AppData::FormWidth = 1200;
-int AppData::FormHeight = 750;
+int AppData::RowHeight = 25;        // 行高
+int AppData::RightWidth = 180;      // 右侧宽度
+int AppData::FormWidth = 1200;      // 窗体宽度
+int AppData::FormHeight = 750;      // 窗体高度
 
 void AppData::checkRatio()
 {

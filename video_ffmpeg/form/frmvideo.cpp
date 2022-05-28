@@ -1,4 +1,20 @@
-﻿#include "frmvideo.h"
+﻿/**
+ * @file frmvideo.cpp
+ * @author creekwater
+ * @brief 
+ * @version 0.1
+ * @date 2022-05-28
+ * 
+ * 1、4个视频流播放器，自行填入RTSP视频流地址
+ * rtsp://admin:密码@192.168.3.170:554
+ * 
+ * 2、填入本地视频文件，可以播放本地视频
+ * 
+ * @copyright Copyright (c) 2022
+ * 
+ */
+
+#include "frmvideo.h"
 #include "ui_frmvideo.h"
 #include "head.h"
 #include "ffmpegwidget.h"
@@ -59,7 +75,7 @@ void frmVideo::initForm()
 
     //安卓屏幕比较小尽量空出位置
 #ifdef Q_OS_ANDROID
-    AppConfig::Callback2 = true;
+    AppConfig::VideoConfig2.callback = true;
     ui->ckSaveFile->setVisible(false);
     ui->ckSaveInterval->setVisible(false);
     ui->ckSaveTime->setVisible(false);
