@@ -3,6 +3,8 @@
 
 QString AppConfig::ConfigFile = "config.ini";
 
+
+// 获取默认配置
 VideoConfig AppConfig::VideoConfig0 = VideoConfig();
 VideoConfig AppConfig::VideoConfig1 = VideoConfig();
 VideoConfig AppConfig::VideoConfig2 = VideoConfig();
@@ -20,23 +22,24 @@ QString AppConfig::VideoType = "1_16";
 int AppConfig::BufferWidth = 1280;
 int AppConfig::BufferHeight = 720;
 
-QString AppConfig::RtspAddr_1 = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
-QString AppConfig::RtspAddr_2 = "http://vfx.mtime.cn/Video/2019/03/19/mp4/190319212559089721.mp4";
-QString AppConfig::RtspAddr_3 = "http://vfx.mtime.cn/Video/2019/03/17/mp4/190317150237409904.mp4";
-QString AppConfig::RtspAddr_4 = "http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4";
+// 配置RTSP地址
+QString AppConfig::RtspAddr_1 = "rtsp://admin:yang0517@192.168.3.170:554";
+QString AppConfig::RtspAddr_2 = "rtsp://admin:yang0517@192.168.3.170:554";
+QString AppConfig::RtspAddr_3 = "rtsp://admin:yang0517@192.168.3.170:554";
+QString AppConfig::RtspAddr_4 = "rtsp://admin:yang0517@192.168.3.170:554";
 
 void AppConfig::readConfig()
 {
     //文件不存在默认值
     if (!QFile(ConfigFile).exists()) {
         VideoConfig0.rtspAddr = "f:/mp4/1.mp4";
-        VideoConfig1.rtspAddr = "http://vfx.mtime.cn/Video/2019/03/18/mp4/190318231014076505.mp4";
+        VideoConfig1.rtspAddr = "rtsp://admin:yang0517@192.168.3.170:554";
         VideoConfig1.fileName = "d:/1.mp4";
         VideoConfig2.rtspAddr = "rtsp://admin:yang0517@192.168.3.170:554";
         VideoConfig2.fileName = "d:/2.mp4";
-        VideoConfig3.rtspAddr = "http://vfx.mtime.cn/Video/2019/03/17/mp4/190317150237409904.mp4";
+        VideoConfig3.rtspAddr = "rtsp://admin:yang0517@192.168.3.170:554";
         VideoConfig3.fileName = "d:/3.mp4";
-        VideoConfig4.rtspAddr = "http://vfx.mtime.cn/Video/2019/03/14/mp4/190314223540373995.mp4";
+        VideoConfig4.rtspAddr = "rtsp://admin:yang0517@192.168.3.170:554";
         VideoConfig4.fileName = "d:/4.mp4";
         VideoConfig5.fillImage = false;
         VideoConfig6.fillImage = false;

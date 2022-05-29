@@ -76,6 +76,10 @@ bool frmView::eventFilter(QObject *watched, QEvent *event)
     return QWidget::eventFilter(watched, event);
 }
 
+/**
+ * @brief 初始化界面
+ * 
+ */
 void frmView::initForm()
 {
     ui->frame->setStyleSheet("border:2px solid #000000;");
@@ -109,16 +113,6 @@ void frmView::initForm()
         widgets.append(widget);
     }
 
-    AppUrl::getUrls(urls);
-    VideoFFmpeg::Instance()->setUrls(urls);
-    VideoFFmpeg::Instance()->setWidgets(widgets);
-    VideoFFmpeg::Instance()->setVideoCount(videoCount);
-
-    //还可以设置超时时间+打开间隔+重连间隔
-    VideoFFmpeg::Instance()->setTimeout(10);
-    VideoFFmpeg::Instance()->setOpenInterval(200);
-    VideoFFmpeg::Instance()->setCheckInterval(5);
-
 #ifdef Q_OS_ANDROID
     //安卓上写死四通道地址测试用
     AppConfig::VideoType = "1_4";
@@ -134,7 +128,18 @@ void frmView::initForm()
     urls[3] = AppConfig::RtspAddr_4;
 
     VideoFFmpeg::Instance()->setOpenInterval(2000);
+#else
+    AppUrl::getUrls(urls);
 #endif
+
+    VideoFFmpeg::Instance()->setUrls(urls);
+    VideoFFmpeg::Instance()->setWidgets(widgets);
+    VideoFFmpeg::Instance()->setVideoCount(videoCount);
+
+    //还可以设置超时时间+打开间隔+重连间隔
+    VideoFFmpeg::Instance()->setTimeout(10);
+    VideoFFmpeg::Instance()->setOpenInterval(200);
+    VideoFFmpeg::Instance()->setCheckInterval(5);
 }
 
 void frmView::initMenu()
