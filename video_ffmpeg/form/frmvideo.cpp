@@ -43,12 +43,14 @@ void frmVideo::initForm()
     font.setPixelSize(qApp->font().pixelSize() + 2);
     font.setBold(true);
 
+#ifndef Q_OS_ANDROID
     ui->btnOpen->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
     ui->btnPause->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
     ui->btnSnap->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
     ui->btnScreen->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
     ui->btnFace->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
     ui->pushButton->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
+#endif
 
     ui->btnOSD1->setFont(font);
     ui->btnOSD2->setFont(font);
