@@ -1,4 +1,8 @@
 build*/
-bin*/
+bin/snap*/
+bin/video*/
+bin/*.mp4
+bin/*.exe
+bin/*.ini
 .vscode/
 video_ffmpeg/*.pro.user
