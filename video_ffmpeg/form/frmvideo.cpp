@@ -35,12 +35,20 @@ frmVideo::~frmVideo()
 
 void frmVideo::initForm()
 {
+    // 设置视频流默认地址，下拉菜单
     QStringList urls;
     ui->cboxUrl->addItems(AppUrl::getUrls(urls));
 
     QFont font;
     font.setPixelSize(qApp->font().pixelSize() + 2);
     font.setBold(true);
+
+    ui->btnOpen->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
+    ui->btnPause->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
+    ui->btnSnap->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
+    ui->btnScreen->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
+    ui->btnFace->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
+    ui->pushButton->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
 
     ui->btnOSD1->setFont(font);
     ui->btnOSD2->setFont(font);
@@ -78,6 +86,9 @@ void frmVideo::initForm()
     //安卓屏幕比较小尽量空出位置
 #ifdef Q_OS_ANDROID
     AppConfig::VideoConfig2.callback = true;
+
+    // 跑在安卓平板端，不需要腾出位置
+#if 0
     ui->ckSaveFile->setVisible(false);
     ui->ckSaveInterval->setVisible(false);
     ui->ckSaveTime->setVisible(false);
@@ -87,6 +98,7 @@ void frmVideo::initForm()
     ui->btnOSD1->setVisible(false);
     ui->btnOSD2->setVisible(false);
     this->layout()->setContentsMargins(0, 0, 0, 0);
+#endif
 #endif
 }
 

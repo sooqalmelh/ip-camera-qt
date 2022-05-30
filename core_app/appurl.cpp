@@ -60,6 +60,7 @@ QStringList AppUrl::getUrls(QStringList &newurls)
     appendUrl(urls, "rtmp://livetv.dhtv.cn:1935/live/news");
 #endif
 
+#if 0
     appendUrl(urls, "https://hls01open.ys7.com/openlive/6e0b2be040a943489ef0b9bb344b96b8.hd.m3u8");
     appendUrl(urls, "http://vts.simba-cn.com:280/gb28181/21100000001320000002.m3u8");
     //https://blog.csdn.net/qq_28073073/article/details/103399279
@@ -86,6 +87,10 @@ QStringList AppUrl::getUrls(QStringList &newurls)
     appendUrl(urls, "http://music.163.com/song/media/outer/url?id=179768.mp3");
     appendUrl(urls, "http://music.163.com/song/media/outer/url?id=281951.mp3");
     appendUrl(urls, "http://music.163.com/song/media/outer/url?id=447925558.mp3");
+#endif
+
+    appendUrl(urls, "rtsp://admin:yang0517@192.168.3.170:554");
+    
 
     //后面的都是win系统上的路径和格式 其他系统无意义
 #ifndef Q_OS_WIN

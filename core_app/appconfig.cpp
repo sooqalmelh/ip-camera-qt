@@ -7,7 +7,7 @@ QString AppConfig::ConfigFile = "config.ini";
 // 获取默认配置
 VideoConfig AppConfig::VideoConfig0 = VideoConfig();
 VideoConfig AppConfig::VideoConfig1 = VideoConfig();
-VideoConfig AppConfig::VideoConfig2 = VideoConfig();
+VideoConfig AppConfig::VideoConfig2 = VideoConfig();        // 用于安卓
 VideoConfig AppConfig::VideoConfig3 = VideoConfig();
 VideoConfig AppConfig::VideoConfig4 = VideoConfig();
 VideoConfig AppConfig::VideoConfig5 = VideoConfig();
