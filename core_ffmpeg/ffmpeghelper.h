@@ -51,7 +51,10 @@ static void qdebuglib()
     qDebug() << TIMEMS << "protocols out" << listProtocolsOut;
 }
 
-//一个软件中只需要初始化一次就行
+/**
+ * @brief 初始化ffmpeg库，一个软件中只需要初始化一次就行
+ *
+ */
 static void initlib()
 {
     static QMutex mutex;

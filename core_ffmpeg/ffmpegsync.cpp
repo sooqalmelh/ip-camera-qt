@@ -3,7 +3,7 @@
  * @author creekwater
  * @brief
  *
- * 时钟同步模块
+ * 音视频解码同步线程
  *
  * @version 0.1
  * @date 2022-06-01
@@ -121,9 +121,9 @@ void FFmpegSync::reset()
 }
 
 /**
- * @brief 设置时钟类型
+ * @brief 设置同步线程类型
  *
- * @param type 0：音频   1：视频
+ * @param type 0：音频同步线程   1：视频同步线程
  */
 void FFmpegSync::setType(quint8 type)
 {

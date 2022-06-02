@@ -1,4 +1,18 @@
-﻿#include "ffmpegthread.h"
+﻿/**
+ * @file ffmpegthread.cpp
+ * @author creekwater
+ * @brief
+ *
+ * 调用ffmpeg库进行音视频解码线程
+ *
+ * @version 0.1
+ * @date 2022-06-03
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "ffmpegthread.h"
 #include "ffmpegsync.h"
 #include "ffmpeghelper.h"
 #include "qapplication.h"
@@ -131,9 +145,19 @@ FFmpegThread::~FFmpegThread()
     }
 }
 
+/**
+ * @brief 初始化解码主线程
+ *
+ * 初始化定时器、摄像头参数、音频、视频
+ *
+ * @return true
+ * @return false
+ */
 bool FFmpegThread::init()
 {
-    if (url.isEmpty()) {
+    // 视频流地址为空则返回
+    if (url.isEmpty())
+    {
         return false;
     }
 
@@ -172,7 +196,7 @@ bool FFmpegThread::init()
 
 /**
  * @brief 初始化摄像头参数（USB摄像头、IP摄像头）
- * 
+ *
  */
 void FFmpegThread::initOption()
 {
@@ -238,9 +262,9 @@ void FFmpegThread::initOption()
 
 /**
  * @brief 初始化输入
- * 
- * @return true 
- * @return false 
+ *
+ * @return true
+ * @return false
  */
 bool FFmpegThread::initInput()
 {
@@ -647,6 +671,14 @@ void FFmpegThread::initMp3()
     }
 }
 
+/**
+ * @brief 初始化一些其他的参数
+ *
+ * 分配解码前的数据包存储地址
+ * 分配解码后的图像帧存储地址
+ * 分配一帧图像的地址
+ *
+ */
 void FFmpegThread::initOther()
 {
 #ifndef gcc45
@@ -659,21 +691,25 @@ void FFmpegThread::initOther()
         audioFrame = av_frame_alloc();
     }
 
-    //视频流索引存在才需要设置视频解码格式等
-    if (videoIndex >= 0) {
-        frameSrc = av_frame_alloc();
-        frameDst = av_frame_alloc();
+    // 视频流索引存在才需要设置视频解码格式等
+    if (videoIndex >= 0)
+    {
+        frameSrc = av_frame_alloc();        // 分配解码前的数据包空间
+        frameDst = av_frame_alloc();        // 分配解码后的图像帧空间
         videoFrame = av_frame_alloc();
 
-        //定义像素格式
+        // 定义像素格式
         AVPixelFormat srcFormat = AV_PIX_FMT_YUV420P;
         AVPixelFormat dstFormat = AV_PIX_FMT_RGB32;
 
         //重新设置源图片格式
-        if (hardware == "none") {
+        if (hardware == "none")
+        {
             //通过解码器获取解码格式
             srcFormat = videoCtx->pix_fmt;
-        } else {
+        }
+        else
+        {
             //硬件加速需要指定格式为 AV_PIX_FMT_NV12
             srcFormat = AV_PIX_FMT_NV12;
         }
@@ -861,6 +897,11 @@ void FFmpegThread::free()
     rotate = 0;
 }
 
+/**
+ * @brief 释放音视频帧
+ *
+ * @param frame 待释放的音视频帧
+ */
 void FFmpegThread::free(AVFrame *frame)
 {
     if (frame != NULL) {
@@ -869,6 +910,11 @@ void FFmpegThread::free(AVFrame *frame)
     }
 }
 
+/**
+ * @brief 释放音视频数据包
+ *
+ * @param packet 待释放的音视频数据包
+ */
 void FFmpegThread::free(AVPacket *packet)
 {
     //av_packet_free(&packet);
@@ -876,6 +922,11 @@ void FFmpegThread::free(AVPacket *packet)
     //av_freep(packet);
 }
 
+/**
+ * @brief 保存为MP4文件
+ *
+ * @param packet
+ */
 void FFmpegThread::saveFileMp4(AVPacket *packet)
 {
     //定时保存文件需要重新计算 pts dts
@@ -890,6 +941,11 @@ void FFmpegThread::saveFileMp4(AVPacket *packet)
     }
 }
 
+/**
+ * @brief 保存为H264裸流
+ *
+ * @param packet
+ */
 void FFmpegThread::saveFileH264(AVPacket *packet)
 {
     if (fileVideo.isOpen() && !isSave) {
@@ -932,6 +988,11 @@ void FFmpegThread::decodeVideo(AVPacket *packet)
     }
 }
 
+/**
+ * @brief 解码视频
+ *
+ * @param packet
+ */
 void FFmpegThread::decodeVideo1(AVPacket *packet)
 {
     if (hardware == "none") {
@@ -952,6 +1013,11 @@ void FFmpegThread::decodeVideo1(AVPacket *packet)
     }
 }
 
+/**
+ * @brief 解码视频子函数
+ *
+ * @param packet
+ */
 void FFmpegThread::decodeVideo2(AVPacket *packet)
 {
     //可能会遇到解码失败的包
@@ -971,7 +1037,7 @@ void FFmpegThread::decodeVideo2(AVPacket *packet)
         frameCount = 0;
     }
 
-    //保存视频流数据到文件
+    // 保存视频流数据到文件
     if (saveMp4) {
         saveFileMp4(packet);
     } else {
@@ -996,6 +1062,10 @@ void FFmpegThread::decodeVideo2(AVPacket *packet)
     }
 }
 
+/**
+ * @brief 解码图片，用于截图
+ *
+ */
 void FFmpegThread::decodeImage()
 {
     //将数据转成一张图片
@@ -1022,6 +1092,11 @@ void FFmpegThread::decodeImage()
     isSnap = false;
 }
 
+/**
+ * @brief 解码音频
+ *
+ * @param packet
+ */
 void FFmpegThread::decodeAudio(AVPacket *packet)
 {
     if (audioFirstPts > AV_TIME_BASE) {
@@ -1041,6 +1116,11 @@ void FFmpegThread::decodeAudio(AVPacket *packet)
     }
 }
 
+/**
+ * @brief 解码视频子函数
+ *
+ * @param packet
+ */
 void FFmpegThread::decodeAudio1(AVPacket *packet)
 {
     //没有启用解码音频
@@ -1069,6 +1149,11 @@ void FFmpegThread::decodeAudio1(AVPacket *packet)
 #endif
 }
 
+/**
+ * @brief 解码音频子函数
+ *
+ * @param packet
+ */
 void FFmpegThread::decodeAudio2(AVPacket *packet)
 {
     if (frameFinish >= 0) {
@@ -1082,24 +1167,35 @@ void FFmpegThread::decodeAudio2(AVPacket *packet)
     }
 }
 
+/**
+ * @brief 解码主线程
+ *
+ */
 void FFmpegThread::run()
 {
     //记住开始解码的时间用于用视频同步
     startTime = av_gettime();
-    while (!stopped) {
-        //根据标志位执行初始化操作
-        if (isPlay) {
-            if (init()) {
-                //这里也需要更新下最后的时间
-                lastTime = QDateTime::currentDateTime();
-                initSave();
-                //初始化完成变量放在这里,绘制那边判断这个变量是否完成才需要开始绘制
-                if (videoIndex >= 0) {
-                    isInit = true;
+    while (!stopped)
+    {
+        // 根据标志位执行初始化操作
+        if (isPlay)
+        {
+            // 初始化摄像头及解码主线程
+            if (init())
+            {
+                lastTime = QDateTime::currentDateTime();    // 这里也需要更新下最后的时间
+                initSave();                                 // 初始化保存
+
+                if (videoIndex >= 0)
+                {
+                    isInit = true;          // 初始化完成变量放在这里,绘制那边判断这个变量是否完成才需要开始绘制
                 }
-                emit receivePlayStart();
-            } else {
-                emit receivePlayError();
+                emit receivePlayStart();    // 发送信号，正确接收到
+            }
+            // 初始化失败，跳出主线程
+            else
+            {
+                emit receivePlayError();    // 发送信号，接受错误
                 break;
             }
 
@@ -1186,6 +1282,10 @@ void FFmpegThread::run()
     //qDebug() << TIMEMS << fileFlag << "stop ffmpeg thread" << url;
 }
 
+/**
+ * @brief 初始化保存的文件名
+ *
+ */
 void FFmpegThread::initSaveFileName()
 {
     QString dirName = QString("%1/%2").arg(savePath).arg(QDATE);
@@ -1193,14 +1293,21 @@ void FFmpegThread::initSaveFileName()
     fileName = QString("%1/%2_%3.mp4").arg(dirName).arg(fileFlag).arg(STRDATETIME);
 }
 
+/**
+ * @brief 初始化保存文件
+ *
+ */
 void FFmpegThread::initSave()
 {
-    if (!saveFile) {
+    // 不保存文件的话，直接返回
+    if (!saveFile)
+    {
         return;
     }
 
     //如果存储间隔大于0说明需要定时存储
-    if (saveInterval > 0) {
+    if (saveInterval > 0)
+    {
         initSaveFileName();
         QMetaObject::invokeMethod(this, "startSave");
     }
@@ -1716,7 +1823,10 @@ void FFmpegThread::setSaveTime(const QDateTime &saveTime)
     this->saveTime = saveTime;
 }
 
-// 开始播放
+/**
+ * @brief 开始播放，外部调用
+ *
+ */
 void FFmpegThread::play()
 {
     //通过标志位让线程执行初始化
