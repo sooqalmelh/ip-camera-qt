@@ -89,8 +89,8 @@ QStringList AppUrl::getUrls(QStringList &newurls)
     appendUrl(urls, "http://music.163.com/song/media/outer/url?id=447925558.mp3");
 #endif
 
-    appendUrl(urls, "rtsp://admin:yang0517@192.168.3.170:554");
-    
+    appendUrl(urls, "rtsp://admin:root123456@192.168.3.173:554");
+
 
     //后面的都是win系统上的路径和格式 其他系统无意义
 #ifndef Q_OS_WIN

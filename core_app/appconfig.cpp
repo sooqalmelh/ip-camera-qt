@@ -23,23 +23,23 @@ int AppConfig::BufferWidth = 1280;
 int AppConfig::BufferHeight = 720;
 
 // 配置RTSP地址
-QString AppConfig::RtspAddr_1 = "rtsp://admin:yang0517@192.168.3.170:554";
-QString AppConfig::RtspAddr_2 = "rtsp://admin:yang0517@192.168.3.170:554";
-QString AppConfig::RtspAddr_3 = "rtsp://admin:yang0517@192.168.3.170:554";
-QString AppConfig::RtspAddr_4 = "rtsp://admin:yang0517@192.168.3.170:554";
+QString AppConfig::RtspAddr_1 = "rtsp://admin:root123456@192.168.3.173:554";
+QString AppConfig::RtspAddr_2 = "rtsp://admin:root123456@192.168.3.173:554";
+QString AppConfig::RtspAddr_3 = "rtsp://admin:root123456@192.168.3.173:554";
+QString AppConfig::RtspAddr_4 = "rtsp://admin:root123456@192.168.3.173:554";
 
 void AppConfig::readConfig()
 {
     //文件不存在默认值
     if (!QFile(ConfigFile).exists()) {
         VideoConfig0.rtspAddr = "f:/mp4/1.mp4";
-        VideoConfig1.rtspAddr = "rtsp://admin:yang0517@192.168.3.170:554";
+        VideoConfig1.rtspAddr = "rtsp://admin:root123456@192.168.3.173:554";
         VideoConfig1.fileName = "d:/1.mp4";
-        VideoConfig2.rtspAddr = "rtsp://admin:yang0517@192.168.3.170:554";
+        VideoConfig2.rtspAddr = "rtsp://admin:root123456@192.168.3.173:554";
         VideoConfig2.fileName = "d:/2.mp4";
-        VideoConfig3.rtspAddr = "rtsp://admin:yang0517@192.168.3.170:554";
+        VideoConfig3.rtspAddr = "rtsp://admin:root123456@192.168.3.173:554";
         VideoConfig3.fileName = "d:/3.mp4";
-        VideoConfig4.rtspAddr = "rtsp://admin:yang0517@192.168.3.170:554";
+        VideoConfig4.rtspAddr = "rtsp://admin:root123456@192.168.3.173:554";
         VideoConfig4.fileName = "d:/4.mp4";
         VideoConfig5.fillImage = false;
         VideoConfig6.fillImage = false;
@@ -74,7 +74,7 @@ void AppConfig::readConfig()
     RtspAddr_2 = set.value("RtspAddr_2", RtspAddr_2).toString();
     RtspAddr_3 = set.value("RtspAddr_3", RtspAddr_3).toString();
     RtspAddr_4 = set.value("RtspAddr_4", RtspAddr_4).toString();
-    set.endGroup();    
+    set.endGroup();
 }
 
 void AppConfig::writeConfig()

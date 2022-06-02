@@ -17,17 +17,17 @@ protected:
     void run();
 
 private:
-    volatile bool stopped;      //线程停止标志位
-    QMutex mutex;               //数据锁
-    quint8 type;                //类型 音频还是视频
-    FFmpegThread *thread;       //解码主线程
-    QList<AVPacket *> packets;  //帧队列
+    volatile bool stopped;      // 线程停止标志位
+    QMutex mutex;               // 数据锁，读取packets队列时上锁
+    quint8 type;                // 类型 0：音频   1：视频
+    FFmpegThread *thread;       // 解码主线程
+    QList<AVPacket *> packets;  // 帧队列
 
-    double ptsTime;             //当前帧显示时间
+    double ptsTime;             //当前帧显示时间（Presentation Time Stamp）
     qint64 showTime;            //已播放时间
     qint64 bufferTime;          //缓冲时间
-    qint64 offsetTime;          //当前时间和开始时间的差值
-    qint64 startTime;           //解码开始时间    
+    qint64 offsetTime;          //当前时间和开始时间的差值，已经播放的时间
+    qint64 startTime;           //解码开始时间
 
 signals:
     void filePositionReceive(qint64 position);
