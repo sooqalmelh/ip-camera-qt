@@ -174,7 +174,7 @@ private:
 
 public slots:
     //启动存储文件
-    void initSaveFileName();
+    void refresh_savefile_name();
     void initSave();
     void startSave();
     void stopSave();
@@ -192,7 +192,7 @@ public slots:
     //定时器执行切换播放位置
     void setPosition();
     //设置播放位置
-    void setPosition(qint64 position);    
+    void setPosition(qint64 position);
 
 public:
     //获取初始化的时间

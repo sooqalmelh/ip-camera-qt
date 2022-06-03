@@ -58,7 +58,7 @@ FFmpegThread::FFmpegThread(QObject *parent) : QThread(parent)
 
     saveFile = false;
     saveInterval = 0;
-    savePath = qApp->applicationDirPath();
+    savePath = qApp->applicationDirPath();  // 可执行文件的绝对路径
     fileFlag = "Ch1";
     fileName = QString("%1/%2_%3.mp4").arg(savePath).arg(fileFlag).arg(STRDATETIME);
     saveTime = QDateTime::fromString("1970-01-01 00:00:00", "yyyy-MM-dd HH:mm:ss");
@@ -426,10 +426,16 @@ bool FFmpegThread::initVideo()
     return true;
 }
 
+/**
+ * @brief 初始化QSV硬件解码
+ *
+ * @return true
+ * @return false
+ */
 bool FFmpegThread::initHWDeviceQsv()
 {
 #ifdef hardwarespeed
-    //创建硬解码设备
+    // 创建硬解码设备
     int result = av_hwdevice_ctx_create(&decode.hw_device_ref, AV_HWDEVICE_TYPE_QSV, "auto", NULL, 0);
     if (result < 0) {
         qDebug() << TIMEMS << fileFlag << "open the hardware device error" << getError(result);
@@ -1044,10 +1050,13 @@ void FFmpegThread::decodeVideo2(AVPacket *packet)
         saveFileH264(packet);
     }
 
-    //判断是否设置了存储单个视频文件的保存时间
-    if (saveFile && saveInterval == 0 && saveTime.date().year() != 1970) {
+    // 需要保存视频文件，且只保存一次，并且设置了保存时间
+    if (saveFile && saveInterval == 0 && saveTime.date().year() != 1970)
+    {
+        // 判断时间格式是否正确
         qint64 offset = QDateTime::currentDateTime().secsTo(saveTime);
-        if (offset < 0) {
+        if (offset < 0)
+        {
             saveTime = QDateTime::fromString("1970-01-01 00:00:00", "yyyy-MM-dd HH:mm:ss");
             QMetaObject::invokeMethod(this, "stopSave");
         }
@@ -1283,10 +1292,10 @@ void FFmpegThread::run()
 }
 
 /**
- * @brief 初始化保存的文件名
+ * @brief 根据时间生成文件名
  *
  */
-void FFmpegThread::initSaveFileName()
+void FFmpegThread::refresh_savefile_name()
 {
     QString dirName = QString("%1/%2").arg(savePath).arg(QDATE);
     newDir(dirName);
@@ -1308,7 +1317,7 @@ void FFmpegThread::initSave()
     //如果存储间隔大于0说明需要定时存储
     if (saveInterval > 0)
     {
-        initSaveFileName();
+        refresh_savefile_name();
         QMetaObject::invokeMethod(this, "startSave");
     }
 
@@ -1333,13 +1342,17 @@ void FFmpegThread::stopSave()
     }
 }
 
+/**
+ * @brief 定时器定期调用，保存视频
+ *
+ */
 void FFmpegThread::saveVideo()
 {
     QMutexLocker locker(&mutex);
     isSave = true;
 
-    //重新设置文件名称
-    initSaveFileName();
+    // 重新设置文件名称
+    refresh_savefile_name();
 
     if (saveMp4) {
         saveVideoMp4(fileName);
