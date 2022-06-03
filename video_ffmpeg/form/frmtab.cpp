@@ -1,15 +1,15 @@
 ﻿/**
  * @file frmtab.cpp
  * @author creekwater
- * @brief 
- * 
- * TAB控件，用来切换不同的视频流测试窗体
- * 
+ * @brief
+ *
+ * TAB控件，用来切换不同的视频流测试窗体，所有窗体的入口
+ *
  * @version 0.1
  * @date 2022-05-29
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
 
@@ -73,6 +73,11 @@ void frmTab::saveConfig()
     AppConfig::writeConfig();
 }
 
+/**
+ * @brief 接收其他控件发来的全屏信号，会调用这个接口
+ *
+ * @param full
+ */
 void frmTab::fullScreen(bool full)
 {
     static Qt::WindowStates state;

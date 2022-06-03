@@ -1,4 +1,18 @@
-﻿#include "quihelper.h"
+﻿/**
+ * @file main.cpp
+ * @author creekwater
+ * @brief
+ *
+ * 初始化窗体，初始化软件相关配置
+ *
+ * @version 0.1
+ * @date 2022-06-03
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "quihelper.h"
 #include "frmtab.h"
 
 //动态设置权限
@@ -128,7 +142,7 @@ int main(int argc, char *argv[])
     w.showMaximized();
 #else
     w.resize(AppData::FormWidth, AppData::FormHeight);
-    w.setWindowTitle(QString("wifi-camera (version:%1)          %2").arg(AppData::Version).arg(AppData::TitleFlag));
+    w.setWindowTitle(QString("IP-camera (version:%1)          %2").arg(AppData::Version).arg(AppData::TitleFlag));
     QUIHelper::showForm(&w);
 #endif
 

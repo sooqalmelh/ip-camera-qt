@@ -1,19 +1,19 @@
 ﻿/**
  * @file frmview.cpp
  * @author creekwater
- * @brief 
- * 
+ * @brief
+ *
  * 视频监控界面：该界面的视频地址是写死的
  * 新建url.txt文档，写入如下
- * 
+ *
  * 1表示通道1，admin是摄像头设置的账号和密码，摄像头的IP和端口
  * 1:rtsp://admin:密码@192.168.3.170:554
- * 
+ *
  * @version 0.1
  * @date 2022-05-28
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
 #include "frmview.h"
@@ -78,7 +78,7 @@ bool frmView::eventFilter(QObject *watched, QEvent *event)
 
 /**
  * @brief 初始化界面
- * 
+ *
  */
 void frmView::initForm()
 {

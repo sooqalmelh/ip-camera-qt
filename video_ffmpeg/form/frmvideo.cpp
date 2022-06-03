@@ -1,19 +1,19 @@
 ﻿/**
  * @file frmvideo.cpp
  * @author creekwater
- * @brief 
+ * @brief
  * @version 0.1
  * @date 2022-05-28
- * 
+ *
  * 这个是所有TAB界面的核心
- * 
+ *
  * 1、4个视频流播放器，自行填入RTSP视频流地址
  * rtsp://admin:密码@192.168.3.170:554
- * 
+ *
  * 2、填入本地视频文件，可以播放本地视频
- * 
+ *
  * @copyright Copyright (c) 2022
- * 
+ *
  */
 
 #include "frmvideo.h"

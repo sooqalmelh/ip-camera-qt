@@ -1,4 +1,18 @@
-﻿#include "frmmain.h"
+﻿/**
+ * @file frmmain.cpp
+ * @author creekwater
+ * @brief
+ *
+ * 主界面
+ *
+ * @version 0.1
+ * @date 2022-06-03
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "frmmain.h"
 #include "ui_frmmain.h"
 #include "head.h"
 #include "frmvideo.h"
