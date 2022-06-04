@@ -16,6 +16,7 @@
 #include "ui_frmmain.h"
 #include "head.h"
 #include "frmvideo.h"
+#include "frmmonitor.h"
 
 frmMain::frmMain(QWidget *parent) : QWidget(parent), ui(new Ui::frmMain)
 {
@@ -31,11 +32,11 @@ frmMain::~frmMain()
 void frmMain::initForm()
 {
 #ifdef Q_OS_ANDROID
-    frmVideo *video2 = new frmVideo;
+    frmMonitor *video2 = new frmMonitor;
     video2->setName("video2");
     ui->layout->addWidget(video2, 0, 0);
 #else
-    frmVideo *video1 = new frmVideo;
+    frmMonitor *video1 = new frmMonitor;
     // frmVideo *video2 = new frmVideo;
     // frmVideo *video3 = new frmVideo;
     // frmVideo *video4 = new frmVideo;

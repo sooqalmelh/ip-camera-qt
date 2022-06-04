@@ -1,4 +1,5 @@
 FORMS += \
+    $$PWD/frmmonitor.ui \
     $$PWD/frmmain.ui \
     $$PWD/frmmulti.ui \
     $$PWD/frmplayer.ui \
@@ -8,6 +9,8 @@ FORMS += \
     $$PWD/frmview.ui
 
 HEADERS += \
+    $$PWD/customrocker.h \
+    $$PWD/frmmonitor.h \
     $$PWD/frmmain.h \
     $$PWD/frmmulti.h \
     $$PWD/frmplayer.h \
@@ -17,6 +20,8 @@ HEADERS += \
     $$PWD/frmview.h
 
 SOURCES += \
+    $$PWD/customrocker.cpp \
+    $$PWD/frmmonitor.cpp \
     $$PWD/frmmain.cpp \
     $$PWD/frmmulti.cpp \
     $$PWD/frmplayer.cpp \
