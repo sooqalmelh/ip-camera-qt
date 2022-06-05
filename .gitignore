@@ -5,4 +5,4 @@ bin/video*/
 bin/*.mp4
 bin/*.exe
 bin/*.ini
-video_ffmpeg/*.pro.user
+project/*/*.pro.user
