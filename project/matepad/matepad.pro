@@ -3,7 +3,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 greaterThan(QT_MAJOR_VERSION, 5): QT += core5compat
 android {QT += androidextras}
 
-TARGET      = video_ffmpeg
+TARGET      = matepad
 TEMPLATE    = app
 
 SOURCES     += main.cpp
