@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "qgridlayout": "cpp",
+        "qopenglshaderprogram": "cpp",
+        "chrono": "cpp",
+        "algorithm": "cpp",
+        "deque": "cpp",
+        "list": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "random": "cpp",
+        "*.tcc": "cpp"
+    }
+}
