@@ -1,4 +1,15 @@
-﻿#include "base64helper.h"
+﻿/**
+ * @file base64helper.cpp
+ * @author creekwater
+ * @brief
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "base64helper.h"
 #include "qbuffer.h"
 #include "qdebug.h"
 

@@ -1,12 +1,26 @@
-﻿#include "quihelper.h"
+﻿/**
+ * @file quihelper.cpp
+ * @author creekwater
+ * @brief
+ *
+ * APP软件的封装好的一些接口
+ *
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "quihelper.h"
 
 #define TIMEMS qPrintable(QTime::currentTime().toString("HH:mm:ss zzz"))
 
 
 /**
  * @brief 获取当前鼠标所在屏幕索引+尺寸
- * 
- * @return int 
+ *
+ * @return int
  */
 int QUIHelper::getScreenIndex()
 {

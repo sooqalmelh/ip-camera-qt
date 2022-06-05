@@ -1,4 +1,18 @@
-﻿#pragma execution_character_set("utf-8")
+﻿/**
+ * @file videobox.cpp
+ * @author creekwater
+ * @brief
+ *
+ * 多通道配置
+ *
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#pragma execution_character_set("utf-8")
 
 #include "videobox.h"
 #include "qmenu.h"

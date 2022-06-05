@@ -1,4 +1,18 @@
-﻿#include "appurl.h"
+﻿/**
+ * @file appurl.cpp
+ * @author creekwater
+ * @brief
+ *
+ * 获取视频地址
+ *
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "appurl.h"
 #include "quihelper.h"
 
 QStringList AppUrl::getUrls(QStringList &newurls)

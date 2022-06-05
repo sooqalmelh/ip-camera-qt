@@ -1,4 +1,18 @@
-﻿#include "appdata.h"
+﻿/**
+ * @file appdata.cpp
+ * @author creekwater
+ * @brief
+ *
+ * 设置整个APP软件，顶层配置
+ *
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "appdata.h"
 #include "quihelper.h"
 
 QString AppData::Version = "2022-06-01";

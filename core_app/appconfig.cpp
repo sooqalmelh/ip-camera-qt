@@ -1,4 +1,15 @@
-﻿#include "appconfig.h"
+﻿/**
+ * @file appconfig.cpp
+ * @author creekwater
+ * @brief
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "appconfig.h"
 #include "quihelper.h"
 
 QString AppConfig::ConfigFile = "config.ini";

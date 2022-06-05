@@ -1,4 +1,15 @@
-﻿#include "videoffmpeg.h"
+﻿/**
+ * @file videoffmpeg.cpp
+ * @author creekwater
+ * @brief
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "videoffmpeg.h"
 #include "ffmpeghelper.h"
 
 QScopedPointer<VideoFFmpeg> VideoFFmpeg::self;

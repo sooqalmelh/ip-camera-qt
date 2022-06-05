@@ -1,4 +1,15 @@
-﻿#include "iconhelper.h"
+﻿/**
+ * @file iconhelper.cpp
+ * @author creekwater
+ * @brief
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "iconhelper.h"
 
 IconHelper *IconHelper::iconFontAliBaBa = 0;
 IconHelper *IconHelper::iconFontAwesome = 0;

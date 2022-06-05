@@ -1,4 +1,18 @@
-﻿#include "ffmpegwidget.h"
+﻿/**
+ * @file ffmpegwidget.cpp
+ * @author creekwater
+ * @brief
+ *
+ * FFMPEG窗体
+ *
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "ffmpegwidget.h"
 
 #ifdef opengl
 #ifdef openglnew

@@ -1,4 +1,18 @@
-﻿#include "ffmpegtool.h"
+﻿/**
+ * @file ffmpegtool.cpp
+ * @author creekwater
+ * @brief
+ *
+ * FFMPEG工具
+ *
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "ffmpegtool.h"
 #include "ffmpeghead.h"
 #include "qapplication.h"
 #include "qmutex.h"

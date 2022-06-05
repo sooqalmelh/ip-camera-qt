@@ -1,4 +1,15 @@
-﻿#include "slider.h"
+﻿/**
+ * @file slider.cpp
+ * @author creekwater
+ * @brief
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "slider.h"
 #include "qevent.h"
 #include "qdebug.h"
 

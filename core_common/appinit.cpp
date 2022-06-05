@@ -1,4 +1,15 @@
-﻿#include "appinit.h"
+﻿/**
+ * @file appinit.cpp
+ * @author creekwater
+ * @brief
+ * @version 0.1
+ * @date 2022-06-05
+ *
+ * @copyright Copyright (c) 2022
+ *
+ */
+
+#include "appinit.h"
 #include "qmutex.h"
 #include "qapplication.h"
 #include "qevent.h"
