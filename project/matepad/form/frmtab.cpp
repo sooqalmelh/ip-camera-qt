@@ -17,10 +17,6 @@
 #include "ui_frmtab.h"
 #include "head.h"
 #include "frmmain.h"
-#include "frmview.h"
-#include "frmplayer.h"
-#include "frmmulti.h"
-#include "frmtool.h"
 
 frmTab::frmTab(QWidget *parent) : QWidget(parent), ui(new Ui::frmTab)
 {
@@ -43,18 +39,7 @@ void frmTab::closeEvent(QCloseEvent *)
 
 void frmTab::initForm()
 {
-    // frmView *view = new frmView;
-    // frmPlayer *player = new frmPlayer;
-    // connect(view, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
-    // connect(player, SIGNAL(fullScreen(bool)), this, SLOT(fullScreen(bool)));
-
     ui->tabWidget->addTab(new frmMain, " 视频流播放器 ");
-    // ui->tabWidget->addTab(view, " 视频监控界面 ");
-    // ui->tabWidget->addTab(player, " 视频播放器 ");
-#ifndef Q_OS_ANDROID
-    // ui->tabWidget->addTab(new frmMulti, " 视频多端复用 ");
-    // ui->tabWidget->addTab(new frmTool, " 其他功能测试 ");
-#endif
 }
 
 void frmTab::initConfig()
