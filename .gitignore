@@ -1,4 +1,5 @@
 build*/
+project/build*
 bin/snap*/
 bin/video*/
 bin/*.mp4
