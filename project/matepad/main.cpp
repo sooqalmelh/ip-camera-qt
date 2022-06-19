@@ -121,7 +121,7 @@ int main(int argc, char *argv[])
     //为了兼容安卓方便直接修改配置文件特意将拓展名改成了 txt
     AppConfig::ConfigFile = AppPath + "/video_ffmpeg.txt";
 #else
-    AppConfig::ConfigFile = AppPath + "/video_ffmpeg.ini";
+    AppConfig::ConfigFile = AppPath + "/config.ini";
 #endif
     AppConfig::readConfig();
     AppData::checkRatio();
