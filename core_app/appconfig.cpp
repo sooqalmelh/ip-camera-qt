@@ -2,6 +2,9 @@
  * @file appconfig.cpp
  * @author creekwater
  * @brief
+ *
+ * 初始化APP的配置
+ *
  * @version 0.1
  * @date 2022-06-05
  *
@@ -15,7 +18,7 @@
 QString AppConfig::ConfigFile = "config.ini";
 
 
-// 获取默认配置
+// 获取默认配置，初始化appconfig中的videoconfig成员
 VideoConfig AppConfig::VideoConfig0 = VideoConfig();
 VideoConfig AppConfig::VideoConfig1 = VideoConfig();
 VideoConfig AppConfig::VideoConfig2 = VideoConfig();        // 用于安卓
@@ -24,6 +27,7 @@ VideoConfig AppConfig::VideoConfig4 = VideoConfig();
 VideoConfig AppConfig::VideoConfig5 = VideoConfig();
 VideoConfig AppConfig::VideoConfig6 = VideoConfig();
 
+// 初始化appconfig中的静态成员
 int AppConfig::TabIndex = 0;
 int AppConfig::TabIndex1 = 0;
 int AppConfig::TabIndex2 = 0;
@@ -33,7 +37,7 @@ QString AppConfig::VideoType = "1_16";
 int AppConfig::BufferWidth = 1280;
 int AppConfig::BufferHeight = 720;
 
-// 配置RTSP地址
+// 初始化appconfig中的RTSP地址成员
 QString AppConfig::RtspAddr_1 = "rtsp://admin:root123456@192.168.3.173:554";
 QString AppConfig::RtspAddr_2 = "rtsp://admin:root123456@192.168.3.173:554";
 QString AppConfig::RtspAddr_3 = "rtsp://admin:root123456@192.168.3.173:554";

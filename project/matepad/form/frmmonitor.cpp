@@ -492,10 +492,10 @@ void frmMonitor::on_btnCloseLight_clicked()
     qDebug() <<  "CMD_CLOSE_LIGHT" ;
 }
 
-void frmMonitor::on_btnCloseMusic_clicked()
+void frmMonitor::on_btnCloseCam_clicked()
 {
-    send_command(CMD_CLOSE_MUSIC, 0);
-    qDebug() <<  "CMD_CLOSE_MUSIC" ;
+    send_command(CMD_CLOSE_CAM, 0);
+    qDebug() <<  "CMD_CLOSE_CAM" ;
 }
 
 void frmMonitor::on_btnCloseTable_clicked()
@@ -564,6 +564,18 @@ void frmMonitor::on_btnShutdownMusic_clicked()
     qDebug() <<  "CMD_CLOSE_MUSIC" ;
 }
 
+void frmMonitor::on_btnVolumeUp_clicked()
+{
+    send_command(CMD_VOLUME_UP, 0);
+    qDebug() <<  "CMD_VOLUME_UP" ;
+}
+
+void frmMonitor::on_btnVolumeDown_clicked()
+{
+    send_command(CMD_VOLUME_DOWN, 0);
+    qDebug() <<  "CMD_VOLUME_DOWN" ;
+}
+
 QString frmMonitor::getLocalIP()
 {
     //获取本机IPv4地址
@@ -591,7 +603,6 @@ void frmMonitor::send_command(quint16 CMD, quint16 DATA)
     if(ui->btnUdpOpen->text() == "断开")
     {
         quint16 targetPort=ui->targetPort->text().toUInt(); //目标端口
-        char send[7];
 
         send_cmd.START = 0xff;
         send_cmd.AISLE = aisle_select;
@@ -606,7 +617,10 @@ void frmMonitor::send_command(quint16 CMD, quint16 DATA)
         udpSocket->writeDatagram(send_cmd.send, 7, QHostAddress::Broadcast,targetPort);
     }
 
-    qDebug() <<  "send : " << msg ;
+    for(int i = 0; i < 7; i++)
+    {
+        qDebug("%x ", send_cmd.send[i]);
+    }
 }
 
 void frmMonitor::on_btnUdpOpen_clicked()

@@ -34,6 +34,8 @@ private:
         CMD_CLOSE_TABLE,
         CMD_ROCKER_ANGLE,
         CMD_ROCKER_LEN,
+        CMD_VOLUME_UP,
+        CMD_VOLUME_DOWN,
     }CMD_E;
 
     typedef struct
@@ -117,7 +119,7 @@ private slots:
 
     void moveAngle(double angle, double distance);
     void on_btnCloseLight_clicked();
-    void on_btnCloseMusic_clicked();
+    void on_btnCloseCam_clicked();
     void on_btnCloseTable_clicked();
     void on_btnInterMusic_clicked();
     void on_btnMusicCycle_clicked();
@@ -130,6 +132,8 @@ private slots:
     void on_btnPreMusic_clicked();
     void on_btnShutdownMusic_clicked();
     void on_btnUdpOpen_clicked();
+    void on_btnVolumeUp_clicked();
+    void on_btnVolumeDown_clicked();
 };
 
 #endif // FRMMONITOR_H
