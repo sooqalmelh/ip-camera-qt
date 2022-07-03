@@ -23,6 +23,7 @@
 #include <QUdpSocket>
 #include <QtNetwork>
 #include <QList>
+#include <quihelper.h>
 
 frmMonitor::frmMonitor(QWidget *parent) : QWidget(parent), ui(new Ui::frmMonitor)
 {
@@ -158,6 +159,13 @@ void frmMonitor::initConfig()
     connect(ui->cboxImageFlag, SIGNAL(currentIndexChanged(int)), this, SLOT(saveConfig()));
 
     connect(ui->customRocker, SIGNAL(moveAngle(double, double)), this, SLOT(moveAngle(double, double)));
+    connect(ui->customRocker, SIGNAL(moveAngleEnd(void)), this, SLOT(moveAngleEnd(void)));
+
+    fTimer=new QTimer(this);
+    fTimer->stop();
+    fTimer->setInterval(200) ;//设置定时周期，单位：毫秒
+    connect(fTimer,SIGNAL(timeout()),this,SLOT(on_timer_timeout()));
+    fTimer->start();
 }
 
 void frmMonitor::saveConfig()
@@ -473,6 +481,31 @@ void frmMonitor::on_ckSaveHand_stateChanged(int arg1)
     }
 }
 
+void frmMonitor::on_timer_timeout()
+{
+    if(flag)
+    {
+        if(ui->btnUdpOpen->text() == "断开")
+        {
+            quint16 targetPort=ui->targetPort->text().toUInt(); //目标端口
+
+            rocker_cmd.START = 0xff;
+            rocker_cmd.AISLE = aisle_select;
+            rocker_cmd.CMD = CMD_ROCKER;
+            rocker_cmd.ANGLE = g_angle;
+            rocker_cmd.DISTANCE = g_distance;
+            rocker_cmd.CHECKSUM = rocker_cmd.send[1] +  \
+                                rocker_cmd.send[2] +  \
+                                rocker_cmd.send[3] +  \
+                                rocker_cmd.send[4] +  \
+                                rocker_cmd.send[5];
+
+            udpSocket->writeDatagram(rocker_cmd.send, 9, QHostAddress::Broadcast,targetPort);
+
+            // QUIHelper::sleep(1000);
+        }
+    }
+}
 /**
  * @brief 接收摇杆控件传来的信号
  *
@@ -482,8 +515,42 @@ void frmMonitor::on_ckSaveHand_stateChanged(int arg1)
 void frmMonitor::moveAngle(double angle, double distance)
 {
     ui->labAngle->setText(QString("%1 %2%").arg((quint16)angle).arg((quint16)distance));
-    send_command(CMD_ROCKER_ANGLE, (quint16)angle);
-    send_command(CMD_ROCKER_LEN, (quint16)distance);
+
+    g_angle = angle;
+
+    g_distance = distance;
+
+    flag = 1;
+
+    // if(ui->btnUdpOpen->text() == "断开")
+    // {
+    //     quint16 targetPort=ui->targetPort->text().toUInt(); //目标端口
+
+    //     rocker_cmd.START = 0xff;
+    //     rocker_cmd.AISLE = aisle_select;
+    //     rocker_cmd.CMD = CMD_ROCKER;
+    //     rocker_cmd.ANGLE = angle;
+    //     rocker_cmd.DISTANCE = distance;
+    //     rocker_cmd.CHECKSUM = rocker_cmd.send[1] +  \
+    //                         rocker_cmd.send[2] +  \
+    //                         rocker_cmd.send[3] +  \
+    //                         rocker_cmd.send[4] +  \
+    //                         rocker_cmd.send[5];
+
+    //     udpSocket->writeDatagram(rocker_cmd.send, 9, QHostAddress::Broadcast,targetPort);
+
+    //     // QUIHelper::sleep(1000);
+    // }
+
+    qDebug() << "CMD_ROCKER" ;
+}
+
+void frmMonitor::moveAngleEnd(void)
+{
+    flag = 0;
+    send_command(CMD_ROCKER_END, 0);
+    ui->labAngle->setText(QString("%1 %2%").arg((quint16)0).arg((quint16)0));
+    qDebug() << "CMD_ROCKER_END" ;
 }
 
 void frmMonitor::on_btnCloseLight_clicked()
@@ -615,11 +682,6 @@ void frmMonitor::send_command(quint16 CMD, quint16 DATA)
                             send_cmd.send[5];
 
         udpSocket->writeDatagram(send_cmd.send, 7, QHostAddress::Broadcast,targetPort);
-    }
-
-    for(int i = 0; i < 7; i++)
-    {
-        qDebug("%x ", send_cmd.send[i]);
     }
 }
 

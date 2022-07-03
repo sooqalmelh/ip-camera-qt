@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QUdpSocket>
+#include <QTimer>
 
 namespace Ui {
 class frmMonitor;
@@ -32,8 +33,8 @@ private:
         CMD_CLOSE_LIGHT,
         CMD_OPEN_TABLE,
         CMD_CLOSE_TABLE,
-        CMD_ROCKER_ANGLE,
-        CMD_ROCKER_LEN,
+        CMD_ROCKER,
+        CMD_ROCKER_END,
         CMD_VOLUME_UP,
         CMD_VOLUME_DOWN,
     }CMD_E;
@@ -54,6 +55,23 @@ private:
         };
     }cmd_t;
 
+    typedef struct
+    {
+        union
+        {
+            char send[9];
+            struct
+            {
+                quint8 START;
+                quint8 AISLE;
+                quint16 CMD;
+                quint16 ANGLE;
+                quint16 DISTANCE;
+                quint8 CHECKSUM;
+            };
+        };
+    }cmd_rocker_t;
+
 
     quint8 aisle_select;
 
@@ -63,9 +81,12 @@ private:
     QString getLocalIP();
 
     cmd_t send_cmd;
+    cmd_rocker_t rocker_cmd;
     void send_command(quint16 CMD, quint16 DATA);
     quint8 msg[7];
-
+    QTimer *fTimer; //定时器
+    quint16 g_angle, g_distance;
+    quint8 flag;
 
 
 private slots:
@@ -90,6 +111,7 @@ public slots:
     void setUrl(const QString &url);
     void setName(const QString &name);
     void setHardware(const QString &hardware);
+    void on_timer_timeout () ; //定时溢出处理槽函数
 
 private slots:
     void on_ckOSD1_stateChanged(int arg1);
@@ -118,6 +140,7 @@ private slots:
     void on_ckSaveHand_stateChanged(int arg1);
 
     void moveAngle(double angle, double distance);
+    void moveAngleEnd(void);
     void on_btnCloseLight_clicked();
     void on_btnCloseCam_clicked();
     void on_btnCloseTable_clicked();

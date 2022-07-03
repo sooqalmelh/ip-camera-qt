@@ -72,6 +72,7 @@ void CustomRocker::mouseReleaseEvent(QMouseEvent *)
     pressed = false;
     currentPoint = centerPoint;
     this->update();
+    emit moveAngleEnd();
 }
 
 double CustomRocker::twoPtDistance(const QPointF &pt1, const QPointF &pt2)

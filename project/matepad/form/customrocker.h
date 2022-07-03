@@ -79,6 +79,7 @@ public Q_SLOTS:
 Q_SIGNALS:
     //当前角度和离中心点的距离
     void moveAngle(double angle, double distance);
+    void moveAngleEnd(void);
 };
 
 #endif // CUSTOMROCKER_H
