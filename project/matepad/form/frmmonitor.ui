@@ -66,41 +66,8 @@
       <property name="spacing">
        <number>3</number>
       </property>
-      <item row="3" column="2">
-       <widget class="QPushButton" name="btnUdpOpen">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="text">
-         <string>连接</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="targetPort">
-        <property name="text">
-         <string>7001</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>本地端口</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="2">
-       <widget class="QPushButton" name="btnSave">
+      <item row="0" column="2">
+       <widget class="QPushButton" name="btnUrl">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
           <horstretch>0</horstretch>
@@ -119,29 +86,16 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="label_2">
+       <widget class="QLabel" name="label">
         <property name="text">
-         <string>云台端口</string>
+         <string>本地端口</string>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="labFileName">
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="targetPort">
         <property name="text">
-         <string>保存地址</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="txtFileName">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="text">
-         <string>d:/1.mp4</string>
+         <string>7001</string>
         </property>
        </widget>
       </item>
@@ -164,22 +118,17 @@
         </property>
        </widget>
       </item>
-      <item row="0" column="2">
-       <widget class="QPushButton" name="btnUrl">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="localPort">
         <property name="text">
-         <string>选择</string>
+         <string>7000</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>云台端口</string>
         </property>
        </widget>
       </item>
@@ -196,10 +145,22 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="localPort">
+      <item row="2" column="2">
+       <widget class="QPushButton" name="btnUdpOpen">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Fixed" vsizetype="Ignored">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="text">
-         <string>7000</string>
+         <string>连接</string>
         </property>
        </widget>
       </item>
@@ -218,7 +179,7 @@
       <enum>QTabWidget::South</enum>
      </property>
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="tab1">
       <attribute name="title">
@@ -384,53 +345,6 @@
        </item>
        <item>
         <layout class="QGridLayout" name="gridLayout_3">
-         <item row="1" column="1">
-          <widget class="QPushButton" name="btnScreen">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>截屏</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="0">
-          <widget class="QCheckBox" name="ckSaveTime">
-           <property name="text">
-            <string>固定</string>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QCheckBox" name="ckSaveInterval">
-           <property name="text">
-            <string>定时</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QPushButton" name="btnPause">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>暂停</string>
-           </property>
-          </widget>
-         </item>
-         <item row="5" column="1">
-          <widget class="QCheckBox" name="ckSaveHand">
-           <property name="text">
-            <string>手动</string>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="0">
           <widget class="QPushButton" name="btnOpen">
            <property name="sizePolicy">
@@ -450,37 +364,10 @@
            </property>
           </widget>
          </item>
-         <item row="4" column="0">
-          <widget class="QCheckBox" name="ckSaveFile">
-           <property name="text">
-            <string>保存</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QPushButton" name="btnSnap">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Ignored" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>截图</string>
-           </property>
-          </widget>
-         </item>
         </layout>
        </item>
        <item>
         <widget class="CustomRocker" name="customRocker" native="true"/>
-       </item>
-       <item>
-        <widget class="QLabel" name="labAngle">
-         <property name="text">
-          <string/>
-         </property>
-        </widget>
        </item>
        <item>
         <spacer name="verticalSpacer">
@@ -1077,11 +964,6 @@
   <tabstop>cboxTransport</tabstop>
   <tabstop>cboxFillImage</tabstop>
   <tabstop>cboxImageFlag</tabstop>
-  <tabstop>btnPause</tabstop>
-  <tabstop>btnSnap</tabstop>
-  <tabstop>btnScreen</tabstop>
-  <tabstop>ckSaveFile</tabstop>
-  <tabstop>ckSaveInterval</tabstop>
   <tabstop>ckOSD1</tabstop>
   <tabstop>cboxFont1</tabstop>
   <tabstop>cboxFormat1</tabstop>

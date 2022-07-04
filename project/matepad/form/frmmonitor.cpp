@@ -55,9 +55,9 @@ void frmMonitor::initForm()
 
 #ifdef Q_OS_ANDROID
     ui->btnOpen->setMaximumHeight(qApp->font().pixelSize()*4);
-    ui->btnPause->setMaximumHeight(qApp->font().pixelSize()*4);
-    ui->btnSnap->setMaximumHeight(qApp->font().pixelSize()*4);
-    ui->btnScreen->setMaximumHeight(qApp->font().pixelSize()*4);
+    // ui->btnPause->setMaximumHeight(qApp->font().pixelSize()*4);
+    // ui->btnSnap->setMaximumHeight(qApp->font().pixelSize()*4);
+    // ui->btnScreen->setMaximumHeight(qApp->font().pixelSize()*4);
 
     ui->cboxUrl->setMaximumHeight(qApp->font().pixelSize()*4);
     // ui->btnFace->setMaximumHeight(qApp->font().pixelSize() + qApp->font().pixelSize()/2);
@@ -103,10 +103,10 @@ void frmMonitor::initForm()
 
     // 跑在安卓平板端，不需要腾出位置
 #if 0
-    ui->ckSaveFile->setVisible(false);
-    ui->ckSaveInterval->setVisible(false);
-    ui->ckSaveTime->setVisible(false);
-    ui->ckSaveHand->setVisible(false);
+    // ui->ckSaveFile->setVisible(false);
+    // ui->ckSaveInterval->setVisible(false);
+    // ui->ckSaveTime->setVisible(false);
+    // ui->ckSaveHand->setVisible(false);
     ui->labFillImage->setVisible(false);
     ui->cboxFillImage->setVisible(false);
     ui->btnOSD1->setVisible(false);
@@ -134,14 +134,14 @@ void frmMonitor::initConfig()
     ui->cboxUrl->lineEdit()->setCursorPosition(0);
     connect(ui->cboxUrl->lineEdit(), SIGNAL(textChanged(QString)), this, SLOT(saveConfig()));
 
-    ui->txtFileName->setText(videoConfig.fileName);
-    connect(ui->txtFileName, SIGNAL(textChanged(QString)), this, SLOT(saveConfig()));
+    // ui->txtFileName->setText(videoConfig.fileName);
+    // connect(ui->txtFileName, SIGNAL(textChanged(QString)), this, SLOT(saveConfig()));
 
-    ui->ckSaveFile->setChecked(videoConfig.saveFile);
-    connect(ui->ckSaveFile, SIGNAL(stateChanged(int)), this, SLOT(saveConfig()));
+    // ui->ckSaveFile->setChecked(videoConfig.saveFile);
+    // connect(ui->ckSaveFile, SIGNAL(stateChanged(int)), this, SLOT(saveConfig()));
 
-    ui->ckSaveInterval->setChecked(videoConfig.saveInterval);
-    connect(ui->ckSaveInterval, SIGNAL(stateChanged(int)), this, SLOT(saveConfig()));
+    // ui->ckSaveInterval->setChecked(videoConfig.saveInterval);
+    // connect(ui->ckSaveInterval, SIGNAL(stateChanged(int)), this, SLOT(saveConfig()));
 
     ui->cboxHardware->setCurrentIndex(ui->cboxHardware->findText(videoConfig.hardware));
     connect(ui->cboxHardware, SIGNAL(currentIndexChanged(int)), this, SLOT(saveConfig()));
@@ -172,9 +172,9 @@ void frmMonitor::saveConfig()
 {
     VideoConfig videoConfig;
     videoConfig.rtspAddr = ui->cboxUrl->currentText().trimmed();
-    videoConfig.fileName = ui->txtFileName->text().trimmed();
-    videoConfig.saveFile = ui->ckSaveFile->isChecked();
-    videoConfig.saveInterval = ui->ckSaveInterval->isChecked();
+    // videoConfig.fileName = ui->txtFileName->text().trimmed();
+    // videoConfig.saveFile = ui->ckSaveFile->isChecked();
+    // videoConfig.saveInterval = ui->ckSaveInterval->isChecked();
     videoConfig.hardware = ui->cboxHardware->currentText();
     videoConfig.transport = ui->cboxTransport->currentText();
     videoConfig.fillImage = (ui->cboxFillImage->currentIndex() == 0);
@@ -323,9 +323,9 @@ void frmMonitor::on_btnOpen_clicked()
         //设置视频流地址
         ui->playWidget->setUrl(ui->cboxUrl->currentText().trimmed());
         //设置是否开启保存文件
-        ui->playWidget->setSaveFile(ui->ckSaveFile->isChecked());
+        // ui->playWidget->setSaveFile(ui->ckSaveFile->isChecked());
         //设置保存文件名称
-        ui->playWidget->setFileName(ui->txtFileName->text().trimmed());
+        // ui->playWidget->setFileName(ui->txtFileName->text().trimmed());
         //设置硬件加速
         ui->playWidget->setHardware(ui->cboxHardware->currentText());
         //设置tcp还是udp处理
@@ -337,16 +337,16 @@ void frmMonitor::on_btnOpen_clicked()
         //ui->playWidget->setCopyImage(true);
 
         //根据不同的选择设定不同的保存策略
-        QString objName = this->objectName();
-        if (ui->ckSaveInterval->isChecked()) {
-            //设置按照时间段存储,单位秒钟,在当前程序目录下以类对象名称命名的文件夹
-            ui->playWidget->setSavePath(AppPath + "/" + objName);
-            ui->playWidget->setFileFlag(objName);
-            ui->playWidget->setSaveInterval(1 * 30);
-        } else if (ui->ckSaveTime->isChecked()) {
-            //如果只需要存储一次文件则设置保存文件时间
-            ui->playWidget->setSaveTime(QDateTime::currentDateTime().addSecs(30));
-        }
+        // QString objName = this->objectName();
+        // if (ui->ckSaveInterval->isChecked()) {
+        //     //设置按照时间段存储,单位秒钟,在当前程序目录下以类对象名称命名的文件夹
+        //     ui->playWidget->setSavePath(AppPath + "/" + objName);
+        //     ui->playWidget->setFileFlag(objName);
+        //     ui->playWidget->setSaveInterval(1 * 30);
+        // } else if (ui->ckSaveTime->isChecked()) {
+        //     //如果只需要存储一次文件则设置保存文件时间
+        //     ui->playWidget->setSaveTime(QDateTime::currentDateTime().addSecs(30));
+        // }
 
         //有些地址比较特殊获取不到fps 需要手动设置
         if (ui->playWidget->getUrl().contains("ys7.com")) {
@@ -368,13 +368,13 @@ void frmMonitor::on_btnOpen_clicked()
 
 void frmMonitor::on_btnPause_clicked()
 {
-    if (ui->btnPause->text() == "暂停") {
-        ui->playWidget->pause();
-        ui->btnPause->setText("继续");
-    } else {
-        ui->playWidget->next();
-        ui->btnPause->setText("暂停");
-    }
+    // if (ui->btnPause->text() == "暂停") {
+    //     ui->playWidget->pause();
+    //     ui->btnPause->setText("继续");
+    // } else {
+    //     ui->playWidget->next();
+    //     ui->btnPause->setText("暂停");
+    // }
 }
 
 void frmMonitor::on_btnSnap_clicked()
@@ -412,7 +412,7 @@ void frmMonitor::on_btnSave_clicked()
         if (!fileName.endsWith(".mp4")) {
             fileName = fileName + ".mp4";
         }
-        ui->txtFileName->setText(fileName);
+        // ui->txtFileName->setText(fileName);
     }
 }
 
@@ -441,27 +441,27 @@ void frmMonitor::on_btnFace_clicked()
 void frmMonitor::on_ckSaveInterval_stateChanged(int arg1)
 {
     if (arg1 != 0) {
-        ui->ckSaveFile->setChecked(true);
-        ui->ckSaveTime->setChecked(false);
-        ui->ckSaveHand->setChecked(false);
+        // ui->ckSaveFile->setChecked(true);
+        // ui->ckSaveTime->setChecked(false);
+        // ui->ckSaveHand->setChecked(false);
     }
 }
 
 void frmMonitor::on_ckSaveTime_stateChanged(int arg1)
 {
     if (arg1 != 0) {
-        ui->ckSaveFile->setChecked(true);
-        ui->ckSaveInterval->setChecked(false);
-        ui->ckSaveHand->setChecked(false);
+        // ui->ckSaveFile->setChecked(true);
+        // ui->ckSaveInterval->setChecked(false);
+        // ui->ckSaveHand->setChecked(false);
     }
 }
 
 void frmMonitor::on_ckSaveHand_stateChanged(int arg1)
 {
     if (arg1 != 0) {
-        ui->ckSaveFile->setChecked(true);
-        ui->ckSaveInterval->setChecked(false);
-        ui->ckSaveTime->setChecked(false);
+        // ui->ckSaveFile->setChecked(true);
+        // ui->ckSaveInterval->setChecked(false);
+        // ui->ckSaveTime->setChecked(false);
     }
 
     if (!ui->playWidget->getIsPlaying()) {
@@ -514,7 +514,7 @@ void frmMonitor::on_timer_timeout()
  */
 void frmMonitor::moveAngle(double angle, double distance)
 {
-    ui->labAngle->setText(QString("%1 %2%").arg((quint16)angle).arg((quint16)distance));
+    // ui->labAngle->setText(QString("%1 %2%").arg((quint16)angle).arg((quint16)distance));
 
     g_angle = angle;
 
@@ -549,7 +549,7 @@ void frmMonitor::moveAngleEnd(void)
 {
     flag = 0;
     send_command(CMD_ROCKER_END, 0);
-    ui->labAngle->setText(QString("%1 %2%").arg((quint16)0).arg((quint16)0));
+    // ui->labAngle->setText(QString("%1 %2%").arg((quint16)0).arg((quint16)0));
     qDebug() << "CMD_ROCKER_END" ;
 }
 
