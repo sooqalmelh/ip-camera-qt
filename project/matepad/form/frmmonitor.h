@@ -87,6 +87,7 @@ private:
     QTimer *fTimer; //定时器
     quint16 g_angle, g_distance;
     quint8 flag;
+    void drawBg();
 
 
 private slots:

@@ -103,6 +103,7 @@ QStringList AppUrl::getUrls(QStringList &newurls)
     appendUrl(urls, "http://music.163.com/song/media/outer/url?id=447925558.mp3");
 #endif
 
+    appendUrl(urls, "rtsp://admin:root123456@192.168.31.64:554");
     appendUrl(urls, "rtsp://admin:root123456@192.168.3.173:554");
 
 

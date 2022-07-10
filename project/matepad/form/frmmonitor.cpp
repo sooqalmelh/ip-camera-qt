@@ -37,8 +37,38 @@ frmMonitor::~frmMonitor()
     delete ui;
 }
 
+void frmMonitor::drawBg()
+{
+    // 新建qimage
+    QImage img;
+    // 加载图片
+    img.load(":/image/logo.png");
+    // scale
+    img = img.scaledToWidth(60, Qt::SmoothTransformation);
+    // resize ui
+    ui->logo->setMaximumSize(60, 60);
+    // set pixmap
+    ui->logo->setPixmap(QPixmap::fromImage(img));
+
+    // QPainter painter;
+
+    // painter->save();
+
+    // //居中绘制
+    // QImage logo_image(":/image/logo.png");
+    // int x = rect().center().x() - logo_image.width() / 2;
+    // int y = rect().center().y() - logo_image.height() / 2;
+    // QPoint point(x, y);
+    // painter->drawImage(point, logo_image);
+
+
+    // painter->restore();
+}
+
 void frmMonitor::initForm()
 {
+    flag = 0;
+
     aisle_select = 0;
 
     udpSocket=new QUdpSocket(this);
@@ -54,7 +84,7 @@ void frmMonitor::initForm()
     this->setFont(font);
 
 #ifdef Q_OS_ANDROID
-    ui->btnOpen->setMaximumHeight(qApp->font().pixelSize()*4);
+    // ui->btnOpen->setMaximumHeight(qApp->font().pixelSize()*4);
     // ui->btnPause->setMaximumHeight(qApp->font().pixelSize()*4);
     // ui->btnSnap->setMaximumHeight(qApp->font().pixelSize()*4);
     // ui->btnScreen->setMaximumHeight(qApp->font().pixelSize()*4);
@@ -74,6 +104,10 @@ void frmMonitor::initForm()
     //设置背景图片或者背景文字
     ui->playWidget->setBgText("视频监控");
     ui->playWidget->setBgImage(QImage(":/image/bg_novideo.png"));
+
+    // 设置logo
+    ui->logo->setPixmap(QPixmap::fromImage(QImage(":/image/logo.png")));
+    ui->logo->show();
 
     //设置OSD图片
     ui->playWidget->setOSD1Image(QImage(":/image/bg_novideo.png"));
@@ -597,8 +631,17 @@ void frmMonitor::on_btnOpenCam_clicked()
 
 void frmMonitor::on_btnOpenLight_clicked()
 {
-    send_command(CMD_OPEN_LIGHT, 0);
-    qDebug() <<  "CMD_OPEN_LIGHT" ;
+    QMessageBox::StandardButton box;
+    box = QMessageBox::question(this, "提示", "确认打开激光吗", QMessageBox::Yes|QMessageBox::No);
+    if(box==QMessageBox::No)
+        return;
+    else
+    {
+        send_command(CMD_OPEN_LIGHT, 0);
+        qDebug() <<  "CMD_OPEN_LIGHT" ;
+    }
+
+
 }
 
 void frmMonitor::on_btnOpenTable_clicked()
