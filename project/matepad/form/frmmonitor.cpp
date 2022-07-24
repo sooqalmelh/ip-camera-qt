@@ -200,6 +200,12 @@ void frmMonitor::initConfig()
     fTimer->setInterval(200) ;//设置定时周期，单位：毫秒
     connect(fTimer,SIGNAL(timeout()),this,SLOT(on_timer_timeout()));
     fTimer->start();
+
+    recv_timer=new QTimer(this);
+    recv_timer->stop();
+    recv_timer->setInterval(200) ;//设置定时周期，单位：毫秒
+    connect(recv_timer,SIGNAL(timeout()),this,SLOT(on_timer_timeout()));
+    recv_timer->start();
 }
 
 void frmMonitor::saveConfig()
@@ -532,7 +538,9 @@ void frmMonitor::on_timer_timeout()
                                 rocker_cmd.send[2] +  \
                                 rocker_cmd.send[3] +  \
                                 rocker_cmd.send[4] +  \
-                                rocker_cmd.send[5];
+                                rocker_cmd.send[5] +  \
+                                rocker_cmd.send[6] +  \
+                                rocker_cmd.send[7];
 
             udpSocket->writeDatagram(rocker_cmd.send, 9, QHostAddress::Broadcast,targetPort);
 
@@ -540,6 +548,15 @@ void frmMonitor::on_timer_timeout()
         }
     }
 }
+
+void frmMonitor::on_recv_timer_timeout()
+{
+    if(ui->btnUdpOpen->text() == "断开")
+    {
+
+    }
+}
+
 /**
  * @brief 接收摇杆控件传来的信号
  *
@@ -601,8 +618,17 @@ void frmMonitor::on_btnCloseCam_clicked()
 
 void frmMonitor::on_btnCloseTable_clicked()
 {
-    send_command(CMD_CLOSE_TABLE, 0);
-    qDebug() <<  "CMD_CLOSE_TABLE" ;
+    // if(ui->btnOpenCam->text() == "开启云台")
+    // {
+    //     send_command(CMD_CLOSE_TABLE, 0);
+    //     ui->btnOpenTable->setText("关闭云台");
+    //     qDebug() <<  "CMD_CLOSE_TABLE" ;
+    // }
+    // else
+    // {
+
+    // }
+
 }
 
 void frmMonitor::on_btnInterMusic_clicked()
@@ -625,29 +651,52 @@ void frmMonitor::on_btnNextMusic_clicked()
 
 void frmMonitor::on_btnOpenCam_clicked()
 {
-    send_command(CMD_OPEN_CAM, 0);
-    qDebug() <<  "CMD_OPEN_CAM" ;
+    if(ui->btnOpenCam->text() == "开启摄像头")
+    {
+        send_command(CMD_OPEN_CAM, 0);
+        ui->btnOpenCam->setText("关闭摄像头");
+    }
+    else
+    {
+        send_command(CMD_CLOSE_CAM, 0);
+        ui->btnOpenCam->setText("开启摄像头");
+    }
 }
 
 void frmMonitor::on_btnOpenLight_clicked()
 {
-    QMessageBox::StandardButton box;
-    box = QMessageBox::question(this, "提示", "确认打开激光吗", QMessageBox::Yes|QMessageBox::No);
-    if(box==QMessageBox::No)
-        return;
+    if(ui->btnOpenLight->text() == "开启激光")
+    {
+        QMessageBox::StandardButton box;
+        box = QMessageBox::question(this, "提示", "确认打开激光吗", QMessageBox::Yes|QMessageBox::No);
+        if(box==QMessageBox::No)
+            return;
+        else
+        {
+            send_command(CMD_OPEN_LIGHT, 0);
+            ui->btnOpenLight->setText("关闭激光");
+        }
+    }
     else
     {
-        send_command(CMD_OPEN_LIGHT, 0);
-        qDebug() <<  "CMD_OPEN_LIGHT" ;
+        send_command(CMD_CLOSE_LIGHT, 0);
+        ui->btnOpenLight->setText("开启激光");
     }
-
 
 }
 
 void frmMonitor::on_btnOpenTable_clicked()
 {
-    send_command(CMD_OPEN_TABLE, 0);
-    qDebug() <<  "CMD_OPEN_TABLE" ;
+    if(ui->btnOpenTable->text() == "开启云台")
+    {
+        send_command(CMD_OPEN_TABLE, 0);
+        ui->btnOpenTable->setText("关闭云台");
+    }
+    else
+    {
+        send_command(CMD_CLOSE_TABLE, 0);
+        ui->btnOpenTable->setText("开启云台");
+    }
 }
 
 void frmMonitor::on_btnOutMusic_clicked()
@@ -728,6 +777,93 @@ void frmMonitor::send_command(quint16 CMD, quint16 DATA)
     }
 }
 
+void frmMonitor::recv_command()
+{
+    typedef struct
+    {
+        union
+        {
+            char send[9];
+            struct
+            {
+                quint8 START;
+                quint8 AISLE;
+                quint16 table_state;
+                quint16 light_state;
+                quint16 cam_state;
+                quint8 CHECKSUM;
+            };
+        };
+    }recv_msg;
+
+    recv_msg msg;
+
+    while (udpSocket->hasPendingDatagrams())
+    {
+        QNetworkDatagram datagram = udpSocket->receiveDatagram();
+        QByteArray data = datagram.data();
+
+        if(data.count() != 9)
+        {
+            continue;
+        }
+
+        for (int i = 0; i < data.count(); ++i)
+        {
+            msg.send[i] = data[i];
+        }
+
+        quint8 checksum= msg.send[1] + msg.send[2] + msg.send[3] + msg.send[4] + msg.send[5] + msg.send[6] + msg.send[7];
+
+        if(checksum != msg.CHECKSUM)
+        {
+            continue;
+        }
+
+        if(msg.table_state && ui->btnOpenTable->text() == "开启云台")
+        {
+            ui->btnOpenTable->setText("关闭云台");
+        }
+        else if(!msg.table_state && ui->btnOpenTable->text() == "关闭云台")
+        {
+            ui->btnOpenTable->setText("开启云台");
+        }
+
+        if(msg.light_state && ui->btnOpenLight->text() == "开启激光")
+        {
+            ui->btnOpenLight->setText("关闭激光");
+        }
+        else if(!msg.light_state && ui->btnOpenLight->text() == "关闭激光")
+        {
+            ui->btnOpenLight->setText("开启激光");
+        }
+
+        if(msg.cam_state && ui->btnOpenCam->text() == "开启摄像头")
+        {
+            ui->btnOpenCam->setText("关闭摄像头");
+        }
+        else if(!msg.cam_state && ui->btnOpenCam->text() == "关闭摄像头")
+        {
+            ui->btnOpenCam->setText("开启摄像头");
+        }
+
+        qDebug() << "get one msg";
+
+        QString print_str;
+        for (int i = 0; i < data.count(); ++i)
+        {
+            print_str.append( tr("0x%1,").arg((quint8)data.at(i),2,16,QLatin1Char('0')).toUpper());
+        }
+
+        qDebug()<< print_str;
+
+        // QString str = QString::fromUtf8(datagram.data());
+
+        // qDebug() << "udp resp: " << str;
+    }
+}
+
+
 void frmMonitor::on_btnUdpOpen_clicked()
 {
     QString localIP=getLocalIP();//获取本机IP地址
@@ -742,6 +878,8 @@ void frmMonitor::on_btnUdpOpen_clicked()
             ui->btnUdpOpen->setText("断开");
             ui->localPort->setEnabled(false);
             ui->targetPort->setEnabled(false);
+
+            connect(udpSocket, SIGNAL(readyRead()), this, SLOT(recv_command()));
         }
     }
     else

@@ -214,32 +214,6 @@
            </property>
           </widget>
          </item>
-         <item row="14" column="0">
-          <widget class="QPushButton" name="btnOpenTable">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>开启云台</string>
-           </property>
-          </widget>
-         </item>
-         <item row="12" column="1">
-          <widget class="QPushButton" name="btnCloseLight">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>关闭激光</string>
-           </property>
-          </widget>
-         </item>
          <item row="2" column="1">
           <widget class="QPushButton" name="btnShutdownMusic">
            <property name="sizePolicy">
@@ -318,19 +292,6 @@
            </property>
           </widget>
          </item>
-         <item row="14" column="1">
-          <widget class="QPushButton" name="btnCloseTable">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>关闭云台</string>
-           </property>
-          </widget>
-         </item>
          <item row="5" column="0">
           <widget class="QPushButton" name="btnVolumeUp">
            <property name="sizePolicy">
@@ -354,19 +315,6 @@
            </property>
            <property name="text">
             <string>内部音源</string>
-           </property>
-          </widget>
-         </item>
-         <item row="10" column="1">
-          <widget class="QPushButton" name="btnCloseCam">
-           <property name="sizePolicy">
-            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-             <horstretch>0</horstretch>
-             <verstretch>0</verstretch>
-            </sizepolicy>
-           </property>
-           <property name="text">
-            <string>关闭摄像头</string>
            </property>
           </widget>
          </item>
@@ -406,6 +354,19 @@
            </property>
            <property name="text">
             <string>单曲循环</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="1">
+          <widget class="QPushButton" name="btnOpenTable">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>开启云台</string>
            </property>
           </widget>
          </item>

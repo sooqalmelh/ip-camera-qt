@@ -85,6 +85,7 @@ private:
     void send_command(quint16 CMD, quint16 DATA);
     quint8 msg[7];
     QTimer *fTimer; //定时器
+    QTimer *recv_timer; //定时器
     quint16 g_angle, g_distance;
     quint8 flag;
     void drawBg();
@@ -112,7 +113,9 @@ public slots:
     void setUrl(const QString &url);
     void setName(const QString &name);
     void setHardware(const QString &hardware);
-    void on_timer_timeout () ; //定时溢出处理槽函数
+    void on_timer_timeout(); //定时溢出处理槽函数
+    void on_recv_timer_timeout();
+    void recv_command();
 
 private slots:
     void on_ckOSD1_stateChanged(int arg1);
